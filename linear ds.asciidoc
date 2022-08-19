@@ -1,0 +1,373 @@
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function getPairsCount(arr, n, sum)
+{
+    let count = 0; // Initialize result
+ 
+    // Consider all possible pairs and check their sums
+    for (let i = 0; i < n; i++)
+        for (let j = i + 1; j < n; j++)
+            if (arr[i] + arr[j] == sum)
+                count++;
+ 
+    return count;
+}
+ 
+// Driver function to test the above function
+    let arr = [ 1, 5, 7, -1, 5 ];
+    let n = arr.length;
+    let sum = 6;
+    document.write("Count of pairs is "
+        + getPairsCount(arr, n, sum));
+    
+----
+
+
++*In[18]:*+
+[source, ipython3]
+----
+%%js
+let numbers = [1, 2, 3, 4, 5];
+let reversedNumbers = numbers.reverse();
+
+console.log(reversedNumbers);
+----
+
+
++*Out[18]:*+
+----<IPython.core.display.Javascript object>----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+
+function check_rotation(s, goal){
+ 
+    if (s.length != goal.length){
+        return false;
+    }
+ 
+    let q1 = []
+    for(let i=0;i<s.length;i++)
+        q1.push(s[i])
+ 
+    let q2 = []
+    for(let i=0;i<goal.length;i++)
+        q2.push(goal[i])
+ 
+    let k = goal.length
+    while (k--){
+        let ch = q2[0]
+        q2.shift()
+        q2.push(ch)
+        if (JSON.stringify(q2) == JSON.stringify(q1))
+            return true
+    }
+ 
+    return false
+}
+ 
+ 
+// driver code
+ 
+let s1 = "ABCD"
+let s2 = "CDAB"
+if (check_rotation(s1, s2))
+    document.write(s2, " is a rotated form of ", s1,"</br>")
+ 
+else
+    document.write(s2, " is not a rotated form of ", s1,"</br>")
+ 
+let s3 = "ACBD"
+if (check_rotation(s1, s3))
+    document.write(s3, " is a rotated form of ", s1,"</br>")
+ 
+else
+    document.write(s3, " is not a rotated form of ", s1,"</br>")
+ 
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function find_FirstNotRepeatedChar(str) {
+  var arra1 = str.split('');
+  var result = '';
+  var ctr = 0;
+ 
+  for (var x = 0; x < arra1.length; x++) {
+    ctr = 0;
+ 
+    for (var y = 0; y < arra1.length; y++) 
+    {
+      if (arra1[x] === arra1[y]) {
+        ctr+= 1;
+      }
+    }
+ 
+    if (ctr < 2) {
+      result = arra1[x];
+      break;
+    }
+  }
+  return result;
+}
+console.log(find_FirstNotRepeatedChar('abacddbec'));
+
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function towerOfHanoi(n, from_rod,  to_rod,  aux_rod)
+{
+        if (n == 0)
+        {
+            return;
+        }
+        towerOfHanoi(n - 1, from_rod, aux_rod, to_rod);
+        document.write("Move disk " + n + " from rod " + from_rod +
+        " to rod " + to_rod+"<br/>");
+        towerOfHanoi(n - 1, aux_rod, to_rod, from_rod);
+    }
+  
+    // Driver code
+    var n = 4; // Number of disks
+    towerOfHanoi(n, 'A', 'C', 'B');
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function isOperator(x)
+    {
+  
+        switch (x) {
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            return true;
+        }
+        return false;
+    }
+  
+    // Convert postfix to Prefix expression
+    function postToPre(post_exp)
+    {
+        let s = [];
+  
+        // length of expression
+        let length = post_exp.length;
+  
+        // reading from right to left
+        for (let i = 0; i < length; i++) {
+  
+            // check if symbol is operator
+            if (isOperator(post_exp[i])) {
+  
+                // Pop two operands from stack
+                let op1 = s[s.length - 1];
+                s.pop();
+                let op2 = s[s.length - 1];
+                s.pop();
+  
+                // concat the operands and operator
+                let temp = post_exp[i] + op2 + op1;
+  
+                // Push String temp back to stack
+                s.push(temp);
+            }
+  
+            // if symbol is an operand
+            else {
+  
+                // Push the operand to the stack
+                s.push(post_exp[i] + "");
+            }
+        }
+  
+        let ans = "";
+        while (s.length > 0)
+            ans += s.pop();
+        return ans;
+    }
+     
+    let post_exp = "ABC/-AK/L-*";
+        
+    // Function call
+    document.write("Prefix : " + postToPre(post_exp));
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function isOperator(x)
+    {
+        switch(x)
+        {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '^':
+            case '%':
+                return true;
+        }
+        return false;
+    }
+ 
+    // Convert prefix to Infix expression
+    function convert(str)
+    {
+        let stack = [];
+ 
+        // Length of expression
+        let l = str.length;
+ 
+        // Reading from right to left
+        for(let i = l - 1; i >= 0; i--)
+        {
+            let c = str[i];
+ 
+            if (isOperator(c))
+            {
+                let op1 = stack[stack.length - 1];
+                stack.pop()
+                let op2 = stack[stack.length - 1];
+                stack.pop()
+ 
+                // Concat the operands and operator
+                let temp = "(" + op1 + c + op2 + ")";
+                stack.push(temp);
+            }
+            else
+            {
+ 
+                // To make character to string
+                stack.push(c + "");
+            }
+        }
+        return stack[stack.length - 1];
+    }
+     
+    let exp = "*-A/BC-/AKL";
+      
+    document.write("Infix : " + convert(exp));
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function areBracketsBalanced(expr)
+{
+     
+    // Using ArrayDeque is faster
+    // than using Stack class
+    let stack = [];
+ 
+    // Traversing the Expression
+    for(let i = 0; i < expr.length; i++)
+    {
+        let x = expr[i];
+ 
+        if (x == '(' || x == '[' || x == '{')
+        {
+             
+            // Push the element in the stack
+            stack.push(x);
+            continue;
+        }
+ 
+        // If current character is not opening
+        // bracket, then it must be closing.
+        // So stack cannot be empty at this point.
+        if (stack.length == 0)
+            return false;
+             
+        let check;
+        switch (x){
+        case ')':
+            check = stack.pop();
+            if (check == '{' || check == '[')
+                return false;
+            break;
+ 
+        case '}':
+            check = stack.pop();
+            if (check == '(' || check == '[')
+                return false;
+            break;
+ 
+        case ']':
+            check = stack.pop();
+            if (check == '(' || check == '{')
+                return false;
+            break;
+        }
+    }
+ 
+    // Check Empty Stack
+    return (stack.length == 0);
+}
+ 
+// Driver code
+let expr = "([{}])";
+ 
+// Function call
+if (areBracketsBalanced(expr))
+    document.write("Balanced ");
+else
+    document.write("Not Balanced ");
+ 
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+function reverse(str){
+     //Creates a new stack
+     let stack = new Stack();
+      
+     let i = 0;
+     let reversedStr = "";
+     //Adds all the characters to the stack.
+     while (i !== str.length) {
+         stack.push(str.charAt(i));
+         i++;
+     }
+   
+     //Creates a reversed string by popping the stack.
+     while (!stack.isEmpty()) {
+         reversedStr += stack.pop();
+     }
+     //returns the reversed string.
+     return reversedStr;
+}
+----
+
+
++*In[ ]:*+
+[source, ipython3]
+----
+%%js
+const arr = [14, 58, 20, 77, 66, 82, 42, 67, 42, 4]
+const min = Math.min(...arr)
+console.log(min)
+----
